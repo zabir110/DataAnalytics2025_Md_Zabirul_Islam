@@ -1,0 +1,55 @@
+Linear Regression Summary:
+
+Call:
+lm(formula = logPRICE ~ logPROPERTYSQFT * BEDS * BATH, data = dataset)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.40849 -0.19765 -0.03568  0.17678  1.63859 
+
+Coefficients:
+                            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                3.3132934  0.0960320  34.502  < 2e-16 ***
+logPROPERTYSQFT            0.6730780  0.0304353  22.115  < 2e-16 ***
+BEDS                      -0.1840857  0.0286783  -6.419 1.50e-10 ***
+BATH                       0.8987663  0.0441440  20.360  < 2e-16 ***
+logPROPERTYSQFT:BEDS       0.0620075  0.0082527   7.514 6.83e-14 ***
+logPROPERTYSQFT:BATH      -0.2009121  0.0117748 -17.063  < 2e-16 ***
+BEDS:BATH                 -0.0553785  0.0038327 -14.449  < 2e-16 ***
+logPROPERTYSQFT:BEDS:BATH  0.0121930  0.0008669  14.065  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.317 on 4791 degrees of freedom
+Multiple R-squared:  0.4897,	Adjusted R-squared:  0.489 
+F-statistic: 656.8 on 7 and 4791 DF,  p-value: < 2.2e-16
+
+
+Decision Tree Summary:
+n= 4799 
+
+node), split, n, deviance, yval
+      * denotes terminal node
+
+ 1) root 4799 943.30140 5.968048  
+   2) BATH< 1.5 1524 106.95170 5.603154 *
+   3) BATH>=1.5 3275 539.00650 6.137849  
+     6) logPROPERTYSQFT< 3.558829 2882 329.63420 6.062503  
+      12) BATH< 3.5 2339 215.04930 6.004170  
+        24) logPROPERTYSQFT< 3.190192 801  44.89448 5.893467 *
+        25) logPROPERTYSQFT>=3.190192 1538 155.22600 6.061825 *
+      13) BATH>=3.5 543  72.34270 6.313773 *
+     7) logPROPERTYSQFT>=3.558829 393  73.02907 6.690386  
+      14) logPROPERTYSQFT< 3.81398 292  43.50268 6.584028 *
+      15) logPROPERTYSQFT>=3.81398 101  16.67346 6.997880 *
+
+Random Forest Summary:
+
+Call:
+ randomForest(formula = logPRICE ~ logPROPERTYSQFT + BEDS + BATH,      data = dataset, ntree = 500, mtry = 2) 
+               Type of random forest: regression
+                     Number of trees: 500
+No. of variables tried at each split: 2
+
+          Mean of squared residuals: 0.07531684
+                    % Var explained: 61.68
