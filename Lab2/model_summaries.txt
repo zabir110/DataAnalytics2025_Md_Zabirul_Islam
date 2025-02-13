@@ -1,55 +1,65 @@
-Linear Regression Summary:
+Model 1 Summary:
 
 Call:
-lm(formula = logPRICE ~ logPROPERTYSQFT * BEDS * BATH, data = dataset)
+lm(formula = logPRICE ~ logPROPERTYSQFT, data = dataset)
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--2.40849 -0.19765 -0.03568  0.17678  1.63859 
+    Min      1Q  Median      3Q     Max 
+-2.2492 -0.4450 -0.1058  0.4189  2.2044 
 
 Coefficients:
-                            Estimate Std. Error t value Pr(>|t|)    
-(Intercept)                3.3132934  0.0960320  34.502  < 2e-16 ***
-logPROPERTYSQFT            0.6730780  0.0304353  22.115  < 2e-16 ***
-BEDS                      -0.1840857  0.0286783  -6.419 1.50e-10 ***
-BATH                       0.8987663  0.0441440  20.360  < 2e-16 ***
-logPROPERTYSQFT:BEDS       0.0620075  0.0082527   7.514 6.83e-14 ***
-logPROPERTYSQFT:BATH      -0.2009121  0.0117748 -17.063  < 2e-16 ***
-BEDS:BATH                 -0.0553785  0.0038327 -14.449  < 2e-16 ***
-logPROPERTYSQFT:BEDS:BATH  0.0121930  0.0008669  14.065  < 2e-16 ***
+                Estimate Std. Error t value Pr(>|t|)    
+(Intercept)      5.96900    0.12468   47.87   <2e-16 ***
+logPROPERTYSQFT  1.06063    0.01686   62.90   <2e-16 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.317 on 4791 degrees of freedom
-Multiple R-squared:  0.4897,	Adjusted R-squared:  0.489 
-F-statistic: 656.8 on 7 and 4791 DF,  p-value: < 2.2e-16
+Residual standard error: 0.6454 on 3141 degrees of freedom
+Multiple R-squared:  0.5574,	Adjusted R-squared:  0.5573 
+F-statistic:  3956 on 1 and 3141 DF,  p-value: < 2.2e-16
 
 
-Decision Tree Summary:
-n= 4799 
-
-node), split, n, deviance, yval
-      * denotes terminal node
-
- 1) root 4799 943.30140 5.968048  
-   2) BATH< 1.5 1524 106.95170 5.603154 *
-   3) BATH>=1.5 3275 539.00650 6.137849  
-     6) logPROPERTYSQFT< 3.558829 2882 329.63420 6.062503  
-      12) BATH< 3.5 2339 215.04930 6.004170  
-        24) logPROPERTYSQFT< 3.190192 801  44.89448 5.893467 *
-        25) logPROPERTYSQFT>=3.190192 1538 155.22600 6.061825 *
-      13) BATH>=3.5 543  72.34270 6.313773 *
-     7) logPROPERTYSQFT>=3.558829 393  73.02907 6.690386  
-      14) logPROPERTYSQFT< 3.81398 292  43.50268 6.584028 *
-      15) logPROPERTYSQFT>=3.81398 101  16.67346 6.997880 *
-
-Random Forest Summary:
+Model 2 Summary:
 
 Call:
- randomForest(formula = logPRICE ~ logPROPERTYSQFT + BEDS + BATH,      data = dataset, ntree = 500, mtry = 2) 
-               Type of random forest: regression
-                     Number of trees: 500
-No. of variables tried at each split: 2
+lm(formula = logPRICE ~ logPROPERTYSQFT + BEDS, data = dataset)
 
-          Mean of squared residuals: 0.07531684
-                    % Var explained: 61.68
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.41059 -0.44704 -0.09849  0.42129  2.07886 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)    
+(Intercept)      5.263542   0.147089  35.785   <2e-16 ***
+logPROPERTYSQFT  1.177717   0.021343  55.180   <2e-16 ***
+BEDS            -0.045409   0.005172  -8.779   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.6378 on 3140 degrees of freedom
+Multiple R-squared:  0.568,	Adjusted R-squared:  0.5677 
+F-statistic:  2064 on 2 and 3140 DF,  p-value: < 2.2e-16
+
+
+Model 3 Summary:
+
+Call:
+lm(formula = logPRICE ~ logPROPERTYSQFT + BEDS + BATH, data = dataset)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.3667 -0.4334 -0.0816  0.4146  2.1475 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)    
+(Intercept)      5.643075   0.152530  36.996   <2e-16 ***
+logPROPERTYSQFT  1.117490   0.022326  50.052   <2e-16 ***
+BEDS            -0.080576   0.006642 -12.131   <2e-16 ***
+BATH             0.075181   0.009053   8.305   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.631 on 3139 degrees of freedom
+Multiple R-squared:  0.5773,	Adjusted R-squared:  0.5769 
+F-statistic:  1429 on 3 and 3139 DF,  p-value: < 2.2e-16
+
