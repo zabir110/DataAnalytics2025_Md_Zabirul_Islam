@@ -1,0 +1,100 @@
+1st Approach:
+############
+
+In this analysis, we trained and evaluated multiple regression models to predict the **PRICE** of houses based on **PROPERTYSQFT** (square footage) from the **NY House Dataset**. The key steps and components of the analysis are as follows:
+
+1. **Data Preparation**:
+   - The dataset was loaded and cleaned to ensure that the relevant columns (such as **PRICE** and **PROPERTYSQFT**) contained numeric data. We removed any non-numeric characters from the columns.
+   - Missing or zero values were filtered out to ensure the dataset only included valid entries.
+   - The **PRICE** and **PROPERTYSQFT** columns were selected for further analysis.
+
+2. **Data Normalization**:
+   - Both **PRICE** and **PROPERTYSQFT** were normalized using a min-max scaling technique to ensure all numeric features are on the same scale. This helps improve the performance of some machine learning models like **SVM** and **k-NN**.
+
+3. **Model Training**:
+   We trained **six regression models** on the dataset:
+   - **Linear Regression**: A simple linear regression model was trained to predict **PRICE** from **PROPERTYSQFT**.
+   - **Random Forest**: A decision tree-based ensemble method was used to model the relationship between **PROPERTYSQFT** and **PRICE**.
+   - **k-Nearest Neighbors (k-NN)**: A non-parametric method was used to predict **PRICE** by looking at the 5 nearest neighbors in the training data.
+   - **SVM (Support Vector Machine)**:
+     - **Linear SVM**: A linear kernel SVM model was trained.
+     - **Radial SVM**: A radial kernel SVM was used to capture non-linear relationships between **PROPERTYSQFT** and **PRICE**.
+     - **Tuned Radial SVM**: A radial kernel SVM with hyperparameter tuning was performed to find the optimal values for the **gamma** and **cost** parameters.
+
+4. **Model Evaluation**:
+   - **MAE (Mean Absolute Error)**, **MSE (Mean Squared Error)**, and **RMSE (Root Mean Squared Error)** were calculated for each model to assess its performance.
+   - We compared the performance of the models based on these error metrics to see which model performed best.
+
+5. **Visualizations**:
+   Several visualizations were created to aid in understanding the model predictions and the relationships between variables:
+   - **Scatter plots** to visualize the relationships between **PROPERTYSQFT** and **PRICE**.
+   - **Logarithmic plots** to assess the distribution and correlation between the variables.
+   - **Predicted vs Actual** plots for each model to visually compare the predictions with the true values.
+   - **Model-specific plots** for each of the regression models (**Linear Regression**, **Random Forest**, **k-NN**, and **SVM**) to showcase how well they fit the data.
+
+### Key Takeaways:
+- **Random Forest** and **Tuned Radial SVM** were the most effective models, showing the best performance in terms of **MAE**, **MSE**, and **RMSE**.
+- **Linear Regression** and **k-NN** showed less accurate predictions, with **k-NN** being sensitive to feature scaling.
+- **Visualizations** such as **Predicted vs Actual** plots helped in identifying how well the models fit the data and provided insights into their predictive capabilities.
+
+This comprehensive analysis provides a detailed evaluation of different regression models applied to real estate data and highlights how well these models generalize for predicting property prices based on square footage.
+
+
+2nd Approach:
+#############
+
+1. **Objective**  
+We trained and evaluated three regression models to predict house prices (log-transformed) based on square footage (log-transformed) using the NY House Dataset, comparing their performance using MAE, MSE, and RMSE.
+
+2. **Steps Performed**  
+**Data Preparation**  
+Dataset Used: NY-House-Dataset.csv  
+
+- **Cleaning**: Removed an outlier (PROPERTYSQFT = 2184.207862).  
+- **Transformations**:  
+    - Applied log10 to both PRICE and PROPERTYSQFT to handle skewness and improve model fitting.  
+
+**Train-Test Split**:  
+- 75% training, 25% testing (randomized with set.seed(123) for reproducibility).  
+
+**Models Trained & Evaluated**  
+- **Linear Regression (LM)**:  
+    - Simple linear model (log_PRICE ~ log_PROPERTYSQFT).  
+    - Evaluated using coefficients, R-squared, and residuals.  
+
+- **Support Vector Machine (SVM) - Linear Kernel**:  
+    - Linear decision boundary.  
+    - Reported number of support vectors.  
+
+- **SVM - Radial Kernel (Optimized)**:  
+    - Hyperparameter tuning (gamma and cost) via 5-fold cross-validation.  
+    - Selected best parameters for final model.  
+
+**Evaluation Metrics (Compared for All Models)**  
+- **MAE (Mean Absolute Error)**: Average absolute prediction error.  
+- **MSE (Mean Squared Error)**: Squared errors (penalizes large errors).  
+- **RMSE (Root MSE)**: Interpretable in original units.  
+
+**Robust Validation**  
+- Monte Carlo Cross-Validation (100 iterations) to ensure stability of metrics.  
+
+**Visualization**  
+- Plotted all three model predictions against actual data for comparison.  
+
+3. **Key Takeaways**  
+- **Best Model**: Likely the Radial SVM (due to its flexibility in capturing non-linear patterns), but metrics determine the final choice.  
+- **Why Log Transform?**  
+    - Compresses large value ranges (NY housing prices vary widely).  
+    - Makes relationships more linear.  
+- **Why SVM?**  
+    - Effective for non-linear relationships (common in real estate).  
+    - Robust to outliers compared to linear regression.  
+
+4. **Output Summary**  
+The script provides:  
+- Detailed model summaries (coefficients, support vectors, tuning results).  
+- Test-set metrics (MAE, MSE, RMSE) for all models.  
+- Monte Carlo averaged metrics (more reliable).  
+- Comparative plot of predictions.  
+
+This approach ensures a comprehensive, reproducible, and statistically sound comparison of regression techniques for predicting housing prices.
